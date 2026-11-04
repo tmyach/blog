@@ -1,0 +1,90 @@
+---
+title: 
+format: html
+---
+
+<div id="blog-post-source">
+    <ul class="blog-post-source">
+    {% for post in blog.posts %}
+        <li class="blog-post" data-timestamp="{{ post.timestamp }}">
+            <time datetime="{{ post.timestamp|date('%Y-%m-%d') }}">{{ post.date }}</time>
+            <a href="{{ post.url }}">{{ post.title }}</a>{% if post.hint %}: {{ post.hint }}{% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+
+<div id="blog-post-groups"></div>
+
+<script>
+    (() => {
+        const source = document.getElementById("blog-post-source");
+        const groups = document.getElementById("blog-post-groups");
+        const posts = [...source.querySelectorAll(".blog-post")];
+        const cutoff = new Date();
+        cutoff.setUTCFullYear(cutoff.getUTCFullYear() - 1);
+
+        const sections = [
+            { title: "Recent Posts", cutoff: true },
+            { title: "Archive", cutoff: false }
+        ];
+
+        for (const sectionData of sections) {
+            const sectionPosts = posts.filter(post =>
+                (Number(post.dataset.timestamp) * 1000 >= cutoff.getTime()) === sectionData.cutoff
+            );
+            const section = document.createElement("section");
+            section.className = "blog-section";
+
+            const heading = document.createElement("h2");
+            heading.className = "blog-section-title";
+            heading.textContent = sectionData.title;
+            section.append(heading);
+
+            const months = new Map();
+            for (const post of sectionPosts) {
+                const date = new Date(Number(post.dataset.timestamp) * 1000);
+                const key = `${date.getUTCFullYear()}-${date.getUTCMonth()}`;
+                let month = months.get(key);
+                if (!month) {
+                    month = document.createElement("section");
+                    month.className = "blog-month";
+
+                    const monthHeading = document.createElement("h3");
+                    monthHeading.className = "blog-month-title";
+                    monthHeading.textContent = new Intl.DateTimeFormat("en", {
+                        month: "long",
+                        year: "numeric",
+                        timeZone: "UTC"
+                    }).format(date);
+                    month.append(monthHeading);
+
+                    const list = document.createElement("ul");
+                    list.className = "blog-month-posts";
+                    month.append(list);
+                    section.append(month);
+                    months.set(key, list);
+                }
+                months.get(key).append(post);
+            }
+
+            if (sectionPosts.length === 0) {
+                const emptyMessage = document.createElement("p");
+                emptyMessage.textContent = sectionData.cutoff ? "No recent posts." : "No archived posts yet.";
+                section.append(emptyMessage);
+            }
+            groups.append(section);
+        }
+
+        source.remove();
+    })();
+</script>
+
+{% if blog.tags %}
+<nav class="mb-bank" aria-label="Browse posts by tag">
+    <span class="mb-label">Tags</span>
+    {% for t in blog.tags %}
+    <a class="mb-tag" href="{{ pctagurl(t.term) }}">{{ t.term }}</a>
+    {% endfor %}
+</nav>
+{% endif %}

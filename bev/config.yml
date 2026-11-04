@@ -1,0 +1,11 @@
+
+# For more settings, see: https://bolt80.com/piecrust/en/latest/docs/reference/website-configuration/
+
+site:
+    title: tmyach | The Bird's Eye View
+    description: Welcome to my blog!
+    pretty_urls: true
+    post_url: "%year%/%month%/%day%/%slug%"
+    posts_per_page: 5
+    timezone: UTC
+    auto_urls: true
