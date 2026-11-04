@@ -2,3 +2,6 @@
   base = "bev"
   command = "python -m pip install --pre piecrust && chef bake"
   publish = "_counter"
+
+  [build.environment]
+  PYTHON_VERSION = "3.13"
