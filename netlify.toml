@@ -1,7 +1,8 @@
 [build]
   base = "bev"
-  command = "python -m pip install --pre piecrust && chef bake"
+  command = "python -m pip install --pre piecrust compressinja==0.0.2 && python scripts/patch_compressinja.py && chef bake"
   publish = "_counter"
 
   [build.environment]
-  PYTHON_VERSION = "3.13"
+  # PieCrust uses inline regex flags rejected by Python 3.11 and newer.
+  PYTHON_VERSION = "3.10"
