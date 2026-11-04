@@ -1,6 +1,6 @@
 [build]
   base = "bev"
-  command = "python -m pip install --pre piecrust && chef bake"
+  command = "python --version && python -m pip install --pre piecrust && chef bake"
   publish = "_counter"
 
   [build.environment]
