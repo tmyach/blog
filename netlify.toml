@@ -1,5 +1,6 @@
 [build]
   base = "bev"
+<<<<<<< Updated upstream
 <<<<<<< HEAD
   command = "python --version && python -m pip install --pre piecrust && chef bake"
 =======
@@ -10,3 +11,10 @@
   [build.environment]
   # PieCrust uses inline regex flags rejected by Python 3.11 and newer.
   PYTHON_VERSION = "3.10"
+=======
+  command = "python -m pip install --pre piecrust && chef bake"
+  publish = "_counter"
+
+[build.environment]
+  PYTHON_VERSION = "3.13"
+>>>>>>> Stashed changes
