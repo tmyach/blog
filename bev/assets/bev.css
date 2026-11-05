@@ -289,11 +289,11 @@ body {
 
 .main-content .page-title {
 	font-family: serifhand;
-	font-size: clamp(1.8rem, 5vw, 2.2rem);
+	font-size: clamp(1.7rem, 4.7vw, 2.1rem);
 	font-weight: normal;
 	line-height: 1.2;
 	margin: 0 0 1rem;
-	padding: 0 0 0.5rem;
+	padding: 0.25rem 0 0.5rem;
 	border-bottom: 1px dotted var(--primary);
 	overflow-wrap: anywhere;
 }
