@@ -1,6 +1,6 @@
 [build]
   base = "bev"
-  command = "python -m pip install --pre piecrust 'Jinja2<3.0' && chef bake"
+  command = "python -m pip install --pre piecrust 'Jinja2<3.0' 'markupsafe<2.1.0' && chef bake"
   publish = "_counter"
 
 [build.environment]
