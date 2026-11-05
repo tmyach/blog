@@ -1,8 +1,8 @@
 ---
 title: About
 time: '15:40:17'
-draft: true
+draft: false
 ---
 
-This is a brand new page.
+Hi! I made this blog to write down my thoughts. I'll be writing about a bunch of different stuff, from gaming to politics!
 
