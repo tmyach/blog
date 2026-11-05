@@ -1,5 +1,5 @@
 ---
-title: About
+title: About my blog
 time: '15:40:17'
 draft: false
 ---
